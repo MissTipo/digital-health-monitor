@@ -6,7 +6,7 @@ The system should be able to predict the risk of developing certain health condi
 The system should also be able to monitor the patient's health in real-time, predicting potential health risks and alerting healthcare providers to take preventative action.
 Additionally, the system should be able to simulate the effects of different treatment options and predict which treatment plan will be most effective for the patient.
 
-# Folder Structure
+## Folder Structure
 - [client](https://github.com/MissTipo/digital-health-monitor/tree/master/client)
 
     Built with React
