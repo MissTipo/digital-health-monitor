@@ -7,7 +7,7 @@ The system should also be able to monitor the patient's health in real-time, pre
 Additionally, the system should be able to simulate the effects of different treatment options and predict which treatment plan will be most effective for the patient.
 
 # Folder Structure
--[client](client)
+-[client](https://github.com/MissTipo/digital-health-monitor/tree/master/client)
 Built with React
 -[server](https://github.com/MissTipo/digital-health-monitor/tree/master/server)
 Built with Express but the machine learning models are trained with python
