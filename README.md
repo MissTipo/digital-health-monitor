@@ -8,10 +8,11 @@ Additionally, the system should be able to simulate the effects of different tre
 
 # Folder Structure
 - [client](https://github.com/MissTipo/digital-health-monitor/tree/master/client)
-Built with React
+
+    Built with React
 - [server](https://github.com/MissTipo/digital-health-monitor/tree/master/server)
 
-Built with Express but the machine learning models are trained with python
+    Built with Express but the machine learning models are trained with python
 
 
 
