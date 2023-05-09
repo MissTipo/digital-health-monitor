@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema as _Schema, model } from 'mongoose';
+const Schema = _Schema;
 
 //Function to convert the first letter of each word to uppercase
 function toTitleCase(str) {
@@ -241,6 +241,6 @@ const patientSchema = new Schema({
 patientSchema.path('name.firstName').set(toTitleCase);
 patientSchema.path('name.lastName').set(toTitleCase);
 
-const Patient = mongoose.model('Patient', patientSchema);
+const Patient = model('Patient', patientSchema);
 
-module.exports = Patient;
+export default Patient;

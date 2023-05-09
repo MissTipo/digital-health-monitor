@@ -1,6 +1,8 @@
 import { Router } from 'express';
 const router = Router();
-import Patient, { find, findById, findByIdAndDelete } from '../models/patientModel';
+import Patient from '../models/patientModel.js';
+import mongoose from 'mongoose';
+// import { find, findById, findByIdAndDelete } from 'mongoose';
 
 // Create a new patient
 

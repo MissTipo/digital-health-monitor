@@ -1,10 +1,10 @@
 import express from 'express';
-import { urlencoded, json } from 'body-parser';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import cors from 'cors';
-import router from '../routes/authRoutes.js';
-import patientRoutes from '../routes/patientRoutes.js';
-// const patientsRouter = require('../routes/patients');
-// app.use('/api/patients', patientsRouter);
+import router from './routes/authRoutes.js';
+import patientRoutes from './routes/patientRoutes.js';
+const { urlencoded, json } = bodyParser;
 const app = express();
 
 app.use(urlencoded({ extended: true }));

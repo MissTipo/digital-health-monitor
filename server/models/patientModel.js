@@ -8,8 +8,7 @@ function toTitleCase(str) {
   });
 }
 
-const patientSchema = new Schema({
-  _id: _Schema.Types.ObjectId,
+const patientDemographics = new Schema({
   name: {
     firstName: {
       type: String,
@@ -26,91 +25,225 @@ const patientSchema = new Schema({
     type: Date,
     required: true,
   },
-  contact: {
-    email: {
-      type: String,
-      required: true,
-      match: /^\S+@\S+\.\S+$/,
-    },
-    phone: {
-      type: String,
-      required: true,
-      match: /^\d{10}$/,
-    },
-    address: {
-      street: String,
-      city: String,
-      state: String,
-      zip: String,
-      country: String,
-    },
-  },
-  age: {
-    type: Number,
-    required: true,
-  },
-  gender: {
+  sex: {
     type: String,
-    enum: ['male', 'female', 'other'],
+    enum: ['Male', 'Female'],
     required: true,
   },
-  weight: {
-    type: Number,
+});
+const patientContactInfo = new Schema({
+  address: {
+    type: String,
+    required: true,
   },
-  height: {
+  email: {
+    type: String,
+    required: true,
+    match: /^\S+@\S+\.\S+$/,
+  },
+  phoneNumber: {
     type: Number,
+    required: true,
+    match: /^\d{10}$/,
+  },
+  state: {
+    type: String,
+    required: true,
+  },
+  zipCode: {
+    type: Number,
+    required: true,
+  },
+});
+const patientMedicalInfo = new Schema({
+  allergies: {
+    type: String,
+    required: true,
   },
   bloodGroup: {
     type: String,
+    required: true,
   },
   geneticMakeup: {
     type: String,
     required: true,
   },
-  medicalHistory: {
-    symptoms: [
-      {
-        name: String,
-        date: Date,
-      },
-    ],
-    medicalConditions: [
-      {
-        name: String,
-        diagnosisDate: Date,
-        treatment: String,
-      },
-    ],
-    allergies: [
-      {
-        type: String,
-      },
-    ],
-    currentMedications: [
-      {
-        type: String,
-      },
-    ],
-    surgeries: [{ type: String }],
-    illnesses: [{ type: String }],
-    hospitalizations: [{ type: String }],
-    appointments: [{ type: Schema.Types.ObjectId, ref: 'Appointment' }],
-  },
-
-  familyHistory: [
+  vitalSigns: [
     {
-      name: String,
-      relationship: String,
-      condition: String,
+      bloodPressure: {
+        type: Number,
+        required: true,
+      },
+      heartRate: {
+        type: Number,
+        required: true,
+      },
+      temperature: {
+        type: Number,
+        required: true,
+      },
     },
   ],
-  travelHistory: [
+  currentMedications: [
     {
-      country: String,
-      date: Date,
+      name: { type: String, required: true },
+      dosage: {
+        type: Number,
+        required: true,
+      },
+      frequency: {
+        type: Number,
+        required: true,
+      },
     },
   ],
 });
+
+const patientMedicalHistory = new Schema({
+  pastMedicalConditions: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      diagnosisDate: {
+        type: Date,
+        required: true,
+      },
+      treatment: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  surgeries: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+    },
+  ],
+  hospitalizations: [
+    {
+      hospital: {
+        name: {
+          type: String,
+          required: true,
+        },
+        location: {
+          type: String,
+          required: true,
+        },
+      },
+      duration: {
+        type: Number,
+        required: true,
+      },
+      treatment: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+});
+const patientDiagnoses = new Schema({
+  currentDiagnosis: {
+    name: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+    },
+  },
+  previousDiagnoses: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+    },
+  ],
+});
+const patientTestResults = new Schema({
+  bloodTests: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+      result: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+});
+const patientFamilyHistory = new Schema({
+  name: {
+    firstName: {
+      type: String,
+      required: true,
+      set: toTitleCase,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      set: toTitleCase,
+    },
+  },
+  relationship: {
+    type: String,
+    required: true,
+  },
+  condition: {
+    type: String,
+    required: true,
+  },
+});
+const patientTravelHistory = new Schema({
+  country: {
+    type: String,
+    required: true,
+  },
+  departureDate: {
+    type: Date,
+    required: true,
+  },
+  arrivalDate: {
+    type: Date,
+    required: true,
+  },
+});
+
+const patientSchema = new Schema({
+  demographics: patientDemographics,
+  contactInfo: patientContactInfo,
+  medicalInfo: patientMedicalInfo,
+  medicalHistory: patientMedicalHistory,
+  diagnoses: patientDiagnoses,
+  familyHistory: patientFamilyHistory,
+  travelHistory: patientTravelHistory,
+  testResults: patientTestResults,
+});
+
+// Custom setter for the name.firstName and name.lastName fields
+// patientSchema.path('name.firstName').set(toTitleCase);
+// patientSchema.path('name.lastName').set(toTitleCase);
 
 const Patient = model('Patient', patientSchema);
 

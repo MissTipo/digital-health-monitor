@@ -3,7 +3,7 @@
   "name": "digital_health_monitor",
   "version": "1.0.0",
   "description": " web application that uses machine learning to analyze patient health data and create a digital twin of the patient. ",
-  "main": "index.js",
+  "main": "server.js",
   "directories": {
     "test": "tests"
   },
