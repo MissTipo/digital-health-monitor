@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-
-const User = require('../models/userModel').default;
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import User from '../models/userModel.js';
 
 export async function signUp(req, res, next) {
   try {
@@ -86,9 +85,8 @@ export async function login(req, res, next) {
     console.log(err);
     res.status(500).json({ error: err });
   }
-
-  function logOut(req, res, next) {
-    res.clearCookie('token');
-    res.status(200).json({ message: 'Logged out successfully!' });
-  }
+}
+export function logOut(req, res, next) {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Logged out successfully!' });
 }
