@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 
 // Create a new user
 
-router.post('/', async (req, res) => {
+router.post('/api/user', async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
