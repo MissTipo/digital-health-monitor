@@ -1,9 +1,11 @@
 import { Router } from 'express';
-const router = Router();
 import Patient from '../models/patientModel.js';
 import mongoose from 'mongoose';
 // import { find, findById, findByIdAndDelete } from 'mongoose';
 
+
+
+const router = Router();
 // Create a new patient
 
 router.post('/api/user', async (req, res) => {

@@ -1,12 +1,15 @@
+import express from 'express';
 import { Router } from 'express';
-const router = Router();
 import User from '../models/userModel.js';
-import mongoose from 'mongoose';
+import { signUp, login, logOut, getAllUser } from '../controllers/authController.js';
 // import { find, findById, findByIdAndDelete } from 'mongoose';
 
 // Create a new user
+const userrouter = Router();
 
-router.post('/api/user', async (req, res) => {
+userrouter.get("/", getAllUser);
+
+userrouter.post('/api/user', async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
@@ -18,7 +21,7 @@ router.post('/api/user', async (req, res) => {
 
 // Get all users
 
-router.get('/', async (req, res) => {
+userrouter.get('/', async (req, res) => {
   try {
     const users = await find({});
     res.send(users);
@@ -28,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get a user by id
-router.get('/:id', async (req, res) => {
+userrouter.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const user = await findById(id);
@@ -42,7 +45,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update a user by id
-router.patch('/:id', async (req, res) => {
+userrouter.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'password'];
@@ -65,7 +68,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete a user by ID
-router.delete('/:id', async (req, res) => {
+userrouter.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const user = await findByIdAndDelete(id);
@@ -78,4 +81,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-export default router;
+export default userrouter;

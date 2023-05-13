@@ -3,6 +3,22 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 
+
+
+export const getAllUser = async (req, res, next) => {
+  let users;
+  try {
+    users = await User.find();
+  } catch (err) {
+    console.log(err);
+  }
+  if (!users) {
+    return res.status(404).json({ message: "No Users Found" })
+  }
+  return res.status(200).json({ users })
+}
+
+
 export async function signUp(req, res, next) {
   try {
     const { firstName, lastName } = req.body;
