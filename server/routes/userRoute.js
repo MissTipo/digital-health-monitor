@@ -1,7 +1,7 @@
 import express from 'express';
 import { Router } from 'express';
 import User from '../models/userModel.js';
-import { signUp, login, logOut, getAllUser } from '../controllers/authController.js';
+import { getAllUser } from '../controllers/authController.js';
 // import { find, findById, findByIdAndDelete } from 'mongoose';
 
 // Create a new user
